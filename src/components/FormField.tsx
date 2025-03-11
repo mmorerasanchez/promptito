@@ -52,11 +52,11 @@ const FormField: React.FC<FormFieldProps> = ({
       }
       onChange(newValue);
     } else if (e.target.value === "") {
-      onChange(type === "text" ? "" : 0);
+      onChange(0);
     }
   };
 
-  const displayValue = typeof value === "number" || typeof value === "string" ? value : "";
+  const displayValue = value !== undefined ? value : "";
 
   return (
     <div className={cn("space-y-2", className)}>
