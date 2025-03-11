@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/' : '/',  // Adjust base path if needed for GitHub Pages
+  base: mode === 'production' ? '/roi-calculator-pro/' : '/',  // Correctly configure base path with repo name
   server: {
     host: "::",
     port: 8080,
