@@ -79,9 +79,9 @@ export const CalculatorProvider: React.FC<{ children: ReactNode }> = ({
       ];
       
       if (numericKeys.includes(key) && typeof value === 'string') {
-        processedData[key as keyof CalculatorData] = parseFloat(value) || 0;
+        processedData[key as keyof CalculatorData] = parseFloat(value as string) || 0;
       } else {
-        processedData[key as keyof CalculatorData] = value;
+        processedData[key as keyof CalculatorData] = value as any;
       }
     });
     

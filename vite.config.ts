@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/roi-calculator-pro/' : '/',  // Correctly configure base path with repo name
+  base: mode === 'production' ? '/notion-roi-calcularor/' : '/',  // Match the repository name
   server: {
     host: "::",
     port: 8080,

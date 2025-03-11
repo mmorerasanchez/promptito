@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={import.meta.env.DEV ? '/' : '/roi-calculator-pro'}>
+      <BrowserRouter basename={import.meta.env.DEV ? '/' : '/notion-roi-calcularor'}>
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

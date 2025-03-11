@@ -4,4 +4,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://[username].github.io/roi-calculator-pro/sitemap.xml
+Sitemap: https://mmorerasanchez.github.io/notion-roi-calcularor/sitemap.xml
