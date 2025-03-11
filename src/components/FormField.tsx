@@ -9,7 +9,7 @@ interface FormFieldProps {
   id: string;
   label: string;
   value: number | string;
-  onChange: (value: number) => void;
+  onChange: (value: number | string) => void;
   tooltip?: string;
   prefix?: string;
   suffix?: string;
@@ -18,6 +18,8 @@ interface FormFieldProps {
   step?: number;
   className?: string;
   type?: "number" | "text" | "percentage" | "currency";
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -33,8 +35,15 @@ const FormField: React.FC<FormFieldProps> = ({
   step = 1,
   className,
   type = "number",
+  placeholder,
+  disabled = false,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (type === "text") {
+      onChange(e.target.value);
+      return;
+    }
+    
     const newValue = parseFloat(e.target.value);
     if (!isNaN(newValue)) {
       // Enforce percentage range if type is percentage
@@ -43,11 +52,11 @@ const FormField: React.FC<FormFieldProps> = ({
       }
       onChange(newValue);
     } else if (e.target.value === "") {
-      onChange(0);
+      onChange(type === "text" ? "" : 0);
     }
   };
 
-  const displayValue = typeof value === "number" ? value : "";
+  const displayValue = typeof value === "number" || typeof value === "string" ? value : "";
 
   return (
     <div className={cn("space-y-2", className)}>
@@ -76,12 +85,14 @@ const FormField: React.FC<FormFieldProps> = ({
         )}
         <Input
           id={id}
-          type="number"
+          type={type === "text" ? "text" : "number"}
           value={displayValue}
           onChange={handleChange}
-          min={min}
-          max={type === "percentage" ? 100 : max}
-          step={type === "percentage" ? 0.1 : step}
+          min={type !== "text" ? min : undefined}
+          max={type === "percentage" ? 100 : (type !== "text" ? max : undefined)}
+          step={type === "percentage" ? 0.1 : (type !== "text" ? step : undefined)}
+          placeholder={placeholder}
+          disabled={disabled}
           className={cn(
             "border-0 shadow-none focus-visible:ring-0",
             prefix && "rounded-l-none",
