@@ -28,7 +28,7 @@ const FormField: React.FC<FormFieldProps> = ({
   tooltip,
   prefix,
   suffix,
-  min,
+  min = 0, // Default to 0 to prevent negative values
   max,
   step = 1,
   className,
@@ -37,6 +37,10 @@ const FormField: React.FC<FormFieldProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
     if (!isNaN(newValue)) {
+      // Enforce percentage range if type is percentage
+      if (type === "percentage" && (newValue < 0 || newValue > 100)) {
+        return;
+      }
       onChange(newValue);
     } else if (e.target.value === "") {
       onChange(0);
@@ -76,8 +80,8 @@ const FormField: React.FC<FormFieldProps> = ({
           value={displayValue}
           onChange={handleChange}
           min={min}
-          max={max}
-          step={step}
+          max={type === "percentage" ? 100 : max}
+          step={type === "percentage" ? 0.1 : step}
           className={cn(
             "border-0 shadow-none focus-visible:ring-0",
             prefix && "rounded-l-none",
