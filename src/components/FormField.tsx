@@ -52,7 +52,7 @@ const FormField: React.FC<FormFieldProps> = ({
       }
       onChange(newValue);
     } else if (e.target.value === "") {
-      onChange(0);
+      onChange(type === "text" ? "" : 0);
     }
   };
 

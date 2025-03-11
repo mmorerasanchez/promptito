@@ -68,7 +68,24 @@ export const CalculatorProvider: React.FC<{ children: ReactNode }> = ({
   const [currentStep, setCurrentStep] = useState(0);
 
   const updateData = (updatedData: Partial<CalculatorData>) => {
-    setData((prev) => ({ ...prev, ...updatedData }));
+    // Ensure all numeric fields are properly converted to numbers
+    const processedData: Partial<CalculatorData> = {};
+    
+    Object.entries(updatedData).forEach(([key, value]) => {
+      const numericKeys = [
+        'tam', 'sam', 'som', 'monthlyReach', 'conversionRate',
+        'revenuePerUser', 'fixedCosts', 'variableCostsPerUser', 'initialInvestment',
+        'monthlyGrowthRate', 'churnRate', 'grossMargin', 'marketingCosts', 'salesCosts'
+      ];
+      
+      if (numericKeys.includes(key) && typeof value === 'string') {
+        processedData[key as keyof CalculatorData] = parseFloat(value) || 0;
+      } else {
+        processedData[key as keyof CalculatorData] = value;
+      }
+    });
+    
+    setData((prev) => ({ ...prev, ...processedData }));
   };
 
   const resetData = () => {

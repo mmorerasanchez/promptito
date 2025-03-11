@@ -4,4 +4,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://roi-calculator-pro.netlify.app/sitemap.xml
+Sitemap: https://[username].github.io/roi-calculator-pro/sitemap.xml
